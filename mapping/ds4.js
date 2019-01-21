@@ -14,7 +14,9 @@ exports._parse = function(data,chg) {
 }
 
 exports._getMode = function(dev) {
-	return dev.release==0?"bluetooth":"usb";
+	if (dev.release==0) { return "bluetooth" }
+	if (dev.path.toLowerCase().indexOf("bluetooth") > -1) { return "bluetooth" }
+	return "usb"
 }
 
 exports.setLed = function(r, g, b, flashOn, flashOff) {
@@ -96,6 +98,6 @@ function ds4Write(dev) {
 		}
 		//let s = ''; msg.forEach(function(e) { s += "0x"+(e?e.toString(16):'00')+", "; }); console.log(s.substr(0,s.length-2));
 		msg.shift(); //Remove 0xa2 at start.
-		dev.write(msg, true);
+		dev.write(msg);
 	}
 }
