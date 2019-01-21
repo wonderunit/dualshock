@@ -3,8 +3,11 @@
 
 "use strict";
 
-const fs = require('fs'), hid = require('node-hid'), chalk = require('chalk');
-function error(text, dt) { throw chalk.red("Error: ")+chalk.dim(text)+(dt?"\n"+dt:""); }
+const fs = require('fs')
+const hid = require('node-hid')
+
+function error(text, dt) { throw "Error: " + text +(dt?"\n"+dt:"") }
+
 const RD_ERR = "Error: could not read from HID device", MAPDIR = __dirname+"/mapping/";
 
 //Extra Useful Functions:

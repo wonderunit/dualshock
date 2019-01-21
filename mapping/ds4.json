@@ -1,6 +1,6 @@
 {
   "vendor": 1356,
-  "product": {"1476":"old","2508":"new"},
+  "product": {"1476": "old", "2508": "new", "2976":"wirelessusb"},
   "bt-id-byte":17,
   "bt-offset":2,
   "button": {
