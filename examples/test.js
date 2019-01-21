@@ -78,7 +78,7 @@ function begin() {
 		//Uncomment one of these lines for debugging!
 		//console.log(this.digital);
 		//console.log(this.analog);
-		//console.log(this.motion,this.status);
+		console.log(this.motion,this.status);
 	}
 
 	function rumbleScript(chg, g) {
