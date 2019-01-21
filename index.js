@@ -86,6 +86,12 @@ exports.open = function(dev, opt) {
 	}
 	//Internal Variables:
 	gmp.type = gType; if(gStyle) gmp.style = gStyle; if(dev.mode) gmp.mode = dev.mode;
+
+	if (gmp.mode == "bluetooth") {
+		// needed to initialize data over bt
+		gmp.getFeatureReport(0x04, 66)
+	}
+
 	gmp.msData = {}; gmp.fData = {}; gmp.map = Object.assign({},mapping[gType]);
 	if(gmp.map.special) {
 		const s = gmp.map.special, s2 = {};
