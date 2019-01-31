@@ -8,7 +8,7 @@ const hid = require('node-hid')
 
 function error(text, dt) { throw "Error: " + text +(dt?"\n"+dt:"") }
 
-const RD_ERR = "Error: could not read from HID device", MAPDIR = __dirname+"/mapping/";
+const RD_ERR = "Error: could not read from HID device"
 
 //Extra Useful Functions:
 function obMax(o) {let k=Object.keys(o),i=0,l=k.length,m=0,s;for(;i<l;i++)if(o[k[i]]>m)m=o[k[i]],s=i;return k[s]}
@@ -17,12 +17,17 @@ function obMax(o) {let k=Object.keys(o),i=0,l=k.length,m=0,s;for(;i<l;i++)if(o[k
 function objAdd(a,b) {for(let k=Object.keys(b),i=0,l=k.length;i<l;i++)a[k[i]]=b[k[i]]}
 
 //Controller Mappings:
-const dir = fs.readdirSync(MAPDIR), mapping = {}, api = {};
-for(let i=0,l=dir.length,f; i<l; i++) {
-	f = dir[i].split('.');
-	if(f[1] == 'json') mapping[f[0]] = JSON.parse(fs.readFileSync(MAPDIR+dir[i], 'utf8'));
-	else if(f[1] == 'js') api[f[0]] = require(MAPDIR+dir[i]);
-}
+// const dir = fs.readdirSync(MAPDIR), mapping = {}, api = {};
+// for(let i=0,l=dir.length,f; i<l; i++) {
+// 	f = dir[i].split('.');
+// 	if(f[1] == 'json') mapping[f[0]] = JSON.parse(fs.readFileSync(MAPDIR+dir[i], 'utf8'));
+// 	else if(f[1] == 'js') api[f[0]] = require(MAPDIR+dir[i]);
+// }
+
+const mapping = {}
+const api = {}
+mapping.ds4 = require('./mapping/ds4.json')
+api.ds4 = require('./mapping/ds4.js')
 
 //Get a list of available gamepads.
 exports.getDevices = function(type) {
